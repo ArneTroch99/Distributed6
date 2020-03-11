@@ -2,6 +2,6 @@ public class Main {
 
     public void main()
     {
-        System.out.println("test");
+        System.out.println("benny");
     }
 }
