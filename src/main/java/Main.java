@@ -1,7 +1,6 @@
 public class Main {
 
-    public void main()
-    {
-        System.out.println("benny");
+    public static void main(String[] args){
+        System.out.println("Fuck you Siemendfgfgddfg");
     }
 }
