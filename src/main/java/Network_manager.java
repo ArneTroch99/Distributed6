@@ -3,6 +3,7 @@ import java.net.*;
 
 public class Network_manager {
 
+    //https://www.javatpoint.com/socket-programming
     public void server() {
         try {
 
