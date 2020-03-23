@@ -6,7 +6,8 @@ public class MainClient{
        
         GreetClient client = new GreetClient();
         client.startConnection("10.0.13.14", 8888);
-        client.receiveInputStream();
+        client.sendMessage("!benny.json");
+	client.receiveInputStream();
         client.stopConnection();
 
     }
