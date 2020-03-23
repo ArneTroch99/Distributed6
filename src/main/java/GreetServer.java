@@ -1,5 +1,6 @@
 import java.io.*;
-import java.net.*;
+import java.net.ServerSocket;
+import java.net.Socket;
 
 public class GreetServer {
     private ServerSocket serverSocket;
@@ -24,20 +25,41 @@ public class GreetServer {
             System.out.println("Can't accept client connection. ");
         }
 
-        File file = new File("test.xml");
-        // Get the size of the file
-        byte[] bytes = new byte[16 * 1024];
-        InputStream in = new FileInputStream(file);
-        OutputStream out = socket.getOutputStream();
+        System.out.println("Connection to client established");
 
-        int count;
-        while ((count = in.read(bytes)) > 0) {
-            out.write(bytes, 0, count);
+        in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        String fileName = in.readLine();
+        String[] splitted = fileName.split("!");
+
+        File file = null;
+        boolean found = false;
+
+        try {
+            file = new File(splitted[1]);
+            found = true;
+        } catch (Exception e) {
+            System.out.println("File was not found!");
+            out.println("File was not found!");
         }
 
-        out.close();
-        in.close();
-        socket.close();
+        if (found) {
+            System.out.println("Sending file " + splitted[1]);
+
+            byte[] bytes = new byte[16 * 1024];
+            InputStream in = new FileInputStream(file);
+            OutputStream out = socket.getOutputStream();
+
+            int count;
+            while ((count = in.read(bytes)) > 0) {
+                out.write(bytes, 0, count);
+            }
+
+            System.out.println("File was send");
+
+            out.close();
+            in.close();
+            socket.close();
+        }
 
     }
 
