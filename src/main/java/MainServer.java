@@ -8,7 +8,7 @@ public class MainServer {
         System.out.println("Giles heeft een kleine, Siemen een gigantische, Arne nen wolkenkrabber");
 
         GreetServer server = new GreetServer();
-	server.start(8888);
+	    server.start(8888);
 
     }
 }
