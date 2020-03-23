@@ -20,7 +20,7 @@ public class GreetClient {
         return resp;
     }
 
-    public void receiveInputStream(String ip, int port){
+    public void receiveInputStream(){
 
         InputStream in = null;
         OutputStream out = null;

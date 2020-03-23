@@ -6,7 +6,7 @@ public class MainClient{
        
         GreetClient client = new GreetClient();
         client.startConnection("10.0.13.14", 8888);
-        client.sendMessage("hello server");
+        client.receiveInputStream();
         client.stopConnection();
 
     }
