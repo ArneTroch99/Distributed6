@@ -2,9 +2,9 @@ import java.io.IOException;
 
 public class MainClient {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
 
-        int amount = 10;
+        /*int amount = 10;
 
         GreetClient[] clients = new GreetClient[amount];
         String[] fileNames = new String[amount];
@@ -26,8 +26,11 @@ public class MainClient {
         for (GreetClient client : clients
         ) {
             client.stopConnection();
-        }
+        }*/
 
-
+	UDPClient client = new UDPClient();
+	client.createSocket(8888);
+	client.sendString("!test1.txt", 8888, "10.0.13.14");	
+	client.receiveFile("test1.txt");
     }
 }
