@@ -6,7 +6,7 @@ public class MainServer {
     public static void main(String[] args) throws IOException {
         System.out.println("Giles heeft een kleine, Siemen een gigantische, Arne een wolkenkrabber");
 
-        MultiThreadedServer server = new MultiThreadedServer(8888);
+        /*MultiThreadedServer server = new MultiThreadedServer(8888);
         new Thread(server).start();
 
         while(true) {
@@ -15,7 +15,10 @@ public class MainServer {
                 break;
         }
 
-        server.stop();
+        server.stop();*/
+
+        UDPServer server = new UDPServer(8888);
+        server.runServer();
 
     }
 }
