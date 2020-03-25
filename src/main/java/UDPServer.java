@@ -1,3 +1,5 @@
+import sun.misc.IOUtils;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -60,8 +62,10 @@ public class UDPServer {
                 if (found) {
                     System.out.println("File was found");
                     System.out.println("Sending file " + fileName);
+                    byte[] fileSend = new byte[65535];
                     InputStream inputStream = new FileInputStream(file);
-                    DatagramPacket send = new DatagramPacket(inputStream.toString().getBytes(), inputStream.toString().getBytes().length, ip, 8888);
+                    inputStream.read(fileSend, 0, 65535);
+                    DatagramPacket send = new DatagramPacket(fileSend, inputStream.toString().getBytes().length, ip, 8888);
                     datagramSocket.send(send);
                 }
             }
