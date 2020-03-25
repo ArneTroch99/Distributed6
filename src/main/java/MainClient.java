@@ -4,30 +4,28 @@ public class MainClient {
 
     public static void main(String[] args) throws IOException {
 
-        String fileName = "test1.txt";
-        GreetClient client = new GreetClient();
-        client.startConnection("10.0.13.14", 8888, fileName);
-        client.sendMessage("!" + fileName);
-        client.receiveInputStream();
-        client.stopConnection();
+        int amount = 10;
 
-        fileName = "test2.txt";
-        client.startConnection("10.0.13.14", 8888, fileName);
-        client.sendMessage("!" + fileName);
-        client.receiveInputStream();
-        client.stopConnection();
+        GreetClient[] clients = new GreetClient[amount];
+        String[] fileNames = new String[amount];
 
-        fileName = "test3.txt";
-        client.startConnection("10.0.13.14", 8888, fileName);
-        client.sendMessage("!" + fileName);
-        client.receiveInputStream();
-        client.stopConnection();
+        for (int i = 0; i < amount; i++) {
+            clients[i] = new GreetClient();
+            fileNames[i] = "test" + i + ".txt";
+        }
 
-        fileName = "test4.txt";
-        client.startConnection("10.0.13.14", 8888, fileName);
-        client.sendMessage("!" + fileName);
-        client.receiveInputStream();
-        client.stopConnection();
+        for (int i = 0; i < amount; i++) {
+            clients[i].startConnection("10.0.13.14", 8888, fileNames[i]);
+        }
 
+        for (int i = 0; i < amount; i++) {
+            clients[i].sendMessage("!" + fileNames[i]);
+            clients[i].receiveInputStream();
+        }
+
+        for (GreetClient client : clients
+        ) {
+            client.stopConnection();
+        }
     }
 }
