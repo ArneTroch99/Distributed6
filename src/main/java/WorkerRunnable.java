@@ -6,15 +6,18 @@ public class WorkerRunnable implements Runnable{
 
     private Socket clientSocket;
     private int connectionAmount;
+    private MultiThreadedServer server;
 
-    public WorkerRunnable(Socket clientSocket, int connectionAmount) {
+    public WorkerRunnable(Socket clientSocket, int connectionAmount, MultiThreadedServer server) {
         this.clientSocket = clientSocket;
         this.connectionAmount = connectionAmount;
+        this.server = server;
     }
 
     public void run() {
         BufferedReader in;
         try {
+            System.out.println("New thread, total running: " + server.runningThreads);
             System.out.println("Connection to client established on client address " + clientSocket.getInetAddress() + " on connection " + connectionAmount);
 
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
@@ -46,6 +49,7 @@ public class WorkerRunnable implements Runnable{
 
                 System.out.println("File was send");
                 System.out.println("Closing thread, connection " + connectionAmount);
+                server.runningThreads = server.runningThreads-1;
                 out.close();
                 in.close();
                 clientSocket.close();

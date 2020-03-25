@@ -9,6 +9,7 @@ public class MultiThreadedServer implements Runnable {
     private boolean isStopped = false;
     private Thread runningThread = null;
     private int connectionAmount = 0;
+    public int runningThreads = 0;
 
     public MultiThreadedServer(int port) {
         this.serverPort = port;
@@ -32,9 +33,10 @@ public class MultiThreadedServer implements Runnable {
                         "Error accepting client connection", e);
             }
             System.out.println("New connection, total: " + ++connectionAmount);
+            runningThreads++;
             new Thread(
                     new WorkerRunnable(
-                            clientSocket, connectionAmount)
+                            clientSocket, connectionAmount, this)
             ).start();
         }
         System.out.println("Server Stopped.");
