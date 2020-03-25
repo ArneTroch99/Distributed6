@@ -44,11 +44,9 @@ public class GreetServer {
 
         if (found) {
             System.out.println("Sending file " + splitted[1]);
-
             byte[] bytes = new byte[16 * 1024];
             InputStream in = new FileInputStream(file);
             OutputStream out = socket.getOutputStream();
-
             int count;
             while ((count = in.read(bytes)) > 0) {
                 out.write(bytes, 0, count);

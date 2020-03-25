@@ -1,14 +1,21 @@
 import java.io.IOException;
+import java.util.Scanner;
 
 public class MainServer {
 
     public static void main(String[] args) throws IOException {
-        System.out.println("Fck you Siemendfgfgddfg");
+        System.out.println("Giles heeft een kleine, Siemen een gigantische, Arne een wolkenkrabber");
 
-        System.out.println("Giles heeft een kleine, Siemen een gigantische, Arne nen wolkenkrabber");
+        MultiThreadedServer server = new MultiThreadedServer(8888);
+        new Thread(server).start();
 
-        GreetServer server = new GreetServer();
-	    server.start(8888);
+        while(true) {
+            Scanner scanner = new Scanner(System.in);
+            if (scanner.nextLine().equals("stop"))
+                break;
+        }
+
+        server.stop();
 
     }
 }
