@@ -37,10 +37,6 @@ public class UDPServer {
             DatagramPacket packet;
             while (true) {
 
-                Scanner scanner = new Scanner(System.in);
-                if (scanner.nextLine().equals("stop"))
-                    break;
-
                 packet = new DatagramPacket(receive, receive.length);
                 datagramSocket.receive(packet);
                 InetAddress ip = packet.getAddress();
